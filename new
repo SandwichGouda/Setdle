@@ -1,0 +1,3 @@
+npm create crée juste package.json, c'est un alias de npm init
+yarn est un autre node package manager comme npm
+npm run dev -- -o
