@@ -1,25 +1,12 @@
 <script setup lang="ts">
 
-let props = defineProps(['unselect']);
-
-
-let isSelected = ref(false) ;
-
-function toggleSelect() {
-  isSelected.value = !isSelected.value
-}
-
-while (true) {
-  if (props.unselect) {
-    isSelected.value = false;
-  }
-}
+let props = defineProps(['selected']);
 
 </script>
 
 <template>
 
-<div :class="{ selected: isSelected }" @click="toggleSelect"></div>
+<div :class="{ selected: props.selected }"></div>
 
 </template>
 

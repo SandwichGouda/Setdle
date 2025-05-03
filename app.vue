@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { routerViewLocationKey } from 'vue-router';
-
 
 let numberSelected = ref(0);
 let unselect = ref(false);
@@ -21,18 +19,27 @@ function initMatrix(): boolean[][] {
   return matrix;
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 let selectedMatrix = ref<boolean[][]>(initMatrix());
 
-function toggle(i: number, j : number): void {
-  numberSelected.value++;
+async function toggle(i: number, j : number) {
+  if (selectedMatrix.value[i][j]) {
+    numberSelected.value--;
+  } else {
+    numberSelected.value++;
+  }
+  selectedMatrix.value[i][j] = !selectedMatrix.value[i][j]
+  await sleep(500)
   if (numberSelected.value >= 3) {
     for (let ii = 0 ; ii < rows.value ; ii++) {
       for (let jj = 0 ; jj < rows.value ; jj++) {
         selectedMatrix.value[ii][jj] = false
       }
+      numberSelected.value = 0
     }
-  } else {
-    selectedMatrix.value[i][j] = !selectedMatrix.value[i][j]
   }
 }
 
@@ -43,15 +50,18 @@ function toggle(i: number, j : number): void {
   <title>Setdle</title>
   <div>
 
-    <h1>{{ unselect }}</h1>
+    <!-- {{ selectedMatrix }}
+
+    {{ numberSelected }} -->
 
     <table class="table">
       <thead>
       </thead>
       <tbody>
-      <tr v-for="i in { rows }">
-        <td v-for="j in { cols }">
-          <Card selected="{{ selectedMatrix[i][j] }}" @click="toggle(i,j)"></Card>
+      <tr v-for="(row,i) in selectedMatrix">
+        <td v-for="(bool,j) in row">
+          <Card :selected=bool @click="toggle(i,j)"></Card>
+          <!-- {{  bool  }} -->
         </td>
       </tr>
       </tbody>

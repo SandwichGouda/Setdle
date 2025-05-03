@@ -9,6 +9,6 @@ export default defineNuxtConfig({
       allowedHosts: ['dev.vivenot.dev'],
       port: process.env.port
     }
-  }
-  // ssr: false // Client-side rendering only
+  },
+  ssr: false // Client-side rendering only
 })
