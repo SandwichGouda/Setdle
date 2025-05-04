@@ -4,7 +4,7 @@ let props = defineProps(['selected', 'card']);
 
 const getImage = (name : string) => {
   return new URL(`/assets/cards/${name}`, import.meta.url).href;
-};
+}
 
 </script>
 

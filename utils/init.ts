@@ -1,3 +1,5 @@
+// import { shuffle } from "shuffle-seed";
+
 export type Card = {
     selected: boolean;
     card: string;
@@ -15,11 +17,10 @@ for (let shape of ['l','o','z']) {
     }
 }
 
-console.log(allCards)
-
-
 export function initMatrix<Card>(rows : number, cols : number, salt : number): Card[][] {
     let matrix: Card[][] = [];
+
+    // let currentDate : string = (new Date()).toISOString().slice(0,10);
   
     for (let i = 0; i < rows; i++) {
         let row: Card[] = new Array<Card>()

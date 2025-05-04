@@ -12,8 +12,13 @@
   "dependencies": {
     "@nuxt/image": "^1.10.0",
     "nuxt": "^3.17.1",
+    "seedrandom": "^3.0.5",
     "shuffle-seed": "^1.1.6",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/seedrandom": "^3.0.8",
+    "@types/shuffle-seed": "^1.1.3"
   }
 }

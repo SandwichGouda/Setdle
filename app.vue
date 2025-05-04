@@ -30,11 +30,6 @@ async function toggle(i: number, j : number) {
   }
 }
 
-const currentDate = new Date();
-
-// console.log(currentDate.toISOString().slice(0,10));
-
-
 </script>
 
 <template>
