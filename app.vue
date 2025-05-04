@@ -8,11 +8,11 @@ let cols = ref<number>(4);
 
 
 
-function initMatrix(): boolean[][] {
-  let matrix: boolean[][] = [];
+function initMatrix<T>(fillValue : T): T[][] {
+  let matrix: T[][] = [];
 
   for (let i = 0; i < rows.value; i++) {
-    let row: boolean[] = new Array(cols.value).fill(false);
+    let row: T[] = new Array(cols.value).fill(fillValue);
     matrix.push(row);
   }
 
@@ -23,7 +23,15 @@ function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-let selectedMatrix = ref<boolean[][]>(initMatrix());
+let selectedMatrix = ref<boolean[][]>(initMatrix(false));
+
+let cardsMatrix = ref<string[][]>(initMatrix(""));
+
+for (let i = 0 ; i < rows.value ; i++) {
+  for (let j = 0 ; j < cols.value ; j++) {
+    cardsMatrix.value[i][j] ="zdp3"
+  }
+}
 
 async function toggle(i: number, j : number) {
   if (selectedMatrix.value[i][j]) {
@@ -48,6 +56,11 @@ async function toggle(i: number, j : number) {
 <template>
 
   <title>Setdle</title>
+
+  <!-- <img src="~/assets/cards/zdp3.svg"></img> -->
+  <!-- <svg src="~/assets/cards/zdp3.svg" width="100", height="100"></svg> -->
+  
+
   <div>
 
     <!-- {{ selectedMatrix }}
@@ -60,7 +73,7 @@ async function toggle(i: number, j : number) {
       <tbody>
       <tr v-for="(row,i) in selectedMatrix">
         <td v-for="(bool,j) in row">
-          <Card :selected=bool @click="toggle(i,j)"></Card>
+          <Card @click="toggle(i,j)" :selected=bool></Card>
           <!-- {{  bool  }} -->
         </td>
       </tr>
