@@ -51,6 +51,7 @@ async function toggle(i: number, j : number) {
   }
 }
 const a = ref("zdp2.svg")
+
 </script>
 
 <template>
