@@ -1,4 +1,4 @@
-// import { shuffle } from "shuffle-seed";
+import shuffleSeed from "shuffle-seed";
 
 export type Card = {
     selected: boolean;
@@ -21,6 +21,8 @@ export function initMatrix<Card>(rows : number, cols : number, salt : number): C
     let matrix: Card[][] = [];
 
     // let currentDate : string = (new Date()).toISOString().slice(0,10);
+
+    let shuffled_matrix : Card[][] = shuffleSeed.shuffle(allCards, "seed");
   
     for (let i = 0; i < rows; i++) {
         let row: Card[] = new Array<Card>()
