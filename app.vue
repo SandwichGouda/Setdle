@@ -50,7 +50,7 @@ async function toggle(i: number, j : number) {
     }
   }
 }
-
+const a = ref("zdp2.svg")
 </script>
 
 <template>
@@ -73,7 +73,7 @@ async function toggle(i: number, j : number) {
       <tbody>
       <tr v-for="(row,i) in selectedMatrix">
         <td v-for="(bool,j) in row">
-          <Card @click="toggle(i,j)" :selected=bool></Card>
+          <Card @click="toggle(i,j)" :selected=bool :card="a"></Card>
           <!-- {{  bool  }} -->
         </td>
       </tr>

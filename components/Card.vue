@@ -2,7 +2,10 @@
 
 let props = defineProps(['selected', 'card']);
 
-const a : string = "zdp3" ;
+const getImage = (name : string) => {
+  return new URL(`/assets/cards/${name}`, import.meta.url).href;
+};
+
 
 </script>
 
@@ -10,7 +13,7 @@ const a : string = "zdp3" ;
 
 <div :class="{ selected: props.selected }">
 
-  <img src="~/assets/cards/zdp3.svg" draggable="false"/>
+  <img :src="getImage(props.card)" draggable="false"/>
 
 </div>
 
