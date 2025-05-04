@@ -3,79 +3,57 @@
 let numberSelected = ref(0);
 let unselect = ref(false);
 
+let numberPlays = ref(0);
+
 let rows = ref<number>(4);
 let cols = ref<number>(4);
 
+/* Note : some of these refs don't have to be ... */
 
-
-function initMatrix<T>(fillValue : T): T[][] {
-  let matrix: T[][] = [];
-
-  for (let i = 0; i < rows.value; i++) {
-    let row: T[] = new Array(cols.value).fill(fillValue);
-    matrix.push(row);
-  }
-
-  return matrix;
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-let selectedMatrix = ref<boolean[][]>(initMatrix(false));
-
-let cardsMatrix = ref<string[][]>(initMatrix(""));
-
-for (let i = 0 ; i < rows.value ; i++) {
-  for (let j = 0 ; j < cols.value ; j++) {
-    cardsMatrix.value[i][j] ="zdp3"
-  }
-}
+let matrix = ref<Card[][]>(initMatrix(rows.value, cols.value, numberPlays.value));
 
 async function toggle(i: number, j : number) {
-  if (selectedMatrix.value[i][j]) {
+  if (matrix.value[i][j].selected) {
     numberSelected.value--;
   } else {
     numberSelected.value++;
   }
-  selectedMatrix.value[i][j] = !selectedMatrix.value[i][j]
+  matrix.value[i][j].selected = !matrix.value[i][j].selected
   await sleep(500)
   if (numberSelected.value >= 3) {
     for (let ii = 0 ; ii < rows.value ; ii++) {
       for (let jj = 0 ; jj < rows.value ; jj++) {
-        selectedMatrix.value[ii][jj] = false
+        matrix.value[ii][jj].selected = false
       }
       numberSelected.value = 0
     }
   }
 }
-const a = ref("zdp2.svg")
+
+const currentDate = new Date();
+
+// console.log(currentDate.toISOString().slice(0,10));
+
 
 </script>
 
 <template>
 
-  <title>Setdle</title>
-
-  <!-- <img src="~/assets/cards/zdp3.svg"></img> -->
-  <!-- <svg src="~/assets/cards/zdp3.svg" width="100", height="100"></svg> -->
-  
+  <title>Setdle</title>  
 
   <div>
 
-    <!-- {{ selectedMatrix }}
+    <!-- {{ matrix }} -->
 
-    {{ numberSelected }} -->
+    <!-- {{ numberSelected }} -->
 
     <table class="table">
       <thead>
       </thead>
       <tbody>
-      <tr v-for="(row,i) in selectedMatrix">
-        <td v-for="(bool,j) in row">
-          <Card @click="toggle(i,j)" :selected=bool :card="a"></Card>
-          <!-- {{  bool  }} -->
+      <tr v-for="(row,i) in matrix">
+        <td v-for="(card,j) in row">
+          <Card @click="toggle(i,j)" :selected="card.selected" :card="matrix[i][j].card"></Card>
         </td>
       </tr>
       </tbody>

@@ -6,14 +6,13 @@ const getImage = (name : string) => {
   return new URL(`/assets/cards/${name}`, import.meta.url).href;
 };
 
-
 </script>
 
 <template>
 
 <div :class="{ selected: props.selected }">
 
-  <img :src="getImage(props.card)" draggable="false"/>
+  <img :src="getImage(props.card+'.svg')" draggable="false"/>
 
 </div>
 
