@@ -6,22 +6,22 @@ export function isASet(card1 : string, card2 : string, card3 : string) : boolean
     const color : boolean = (card1[2] === card2[2] && card2[2] === card3[2])|| (card1[2] !== card2[2] && card2[2] !== card3[2] && card1[2] !== card3[2])
     const number : boolean = (card1[3] === card2[3] && card2[3] === card3[3])|| (card1[3] !== card2[3] && card2[3] !== card3[3] && card1[3] !== card3[3])
     return shape && pattern && color && number
-} // console.log(isASet("ldg1","ofg2","zeg3"))
+}
 
-function getCardsList( matrix : Card[][] ) : string[] {
+function getCardsList(matrix : Card[][]) : string[] {
     const rows : number = matrix.length ;
     const cols : number = matrix[0].length ;
     const cardsList : string[] = new Array<string>()
     
-    for (let i = 0 ; i < rows ; i++ ) {
-        for (let j = 0 ; j < cols ; j++ ) {
+    for (let i = 0 ; i < rows ; i++) {
+        for (let j = 0 ; j < cols ; j++) {
             cardsList.push(matrix[i][j].card)
         }
     }
     return cardsList
 }
 
-export function getNumberOfSets( matrix : Card[][] ) : number {
+export function getNumberOfSets(matrix : Card[][]) : number {
     let n : number = 0 ; 
     const cardsList : string[] = getCardsList(matrix) ;
     const numberOfCards = cardsList.length ;

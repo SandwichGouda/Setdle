@@ -36,7 +36,8 @@ async function toggle(i: number, j : number) {
     }
     // console.log(selectedCards);
     if (isASet(selectedCards[0],selectedCards[1],selectedCards[2])) {
-      if (!setsFound.includes(selectedCards)) {
+      console.log(selectedCards,setsFound)
+      if (!setsFound.some(a => a.length === selectedCards.length && a.every((val, i) => val === selectedCards[i]))) {
         setsFound.push(selectedCards)
       } 
     }
@@ -51,13 +52,13 @@ async function toggle(i: number, j : number) {
 
   <div>
 
-    {{ matrix }}
+    <!-- {{ matrix }}
 
     {{ numberSelected }}
 
     {{ numberOfSets }}
 
-    {{ setsFound }}
+    {{ setsFound }} -->
 
     <table class="table">
       <thead>
