@@ -4,7 +4,7 @@ let numberSelected = ref<number>(0);
 let unselect = ref<boolean>(false);
 
 let numberPlays = ref<number>(0);
-let rows = ref<number>(3);
+let rows = ref<number>(4);
 let cols = ref<number>(4);
 
 /* Note : some of these refs don't have to be ... */
