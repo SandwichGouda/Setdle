@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-let props = defineProps(['selected', 'card']);
+let props = defineProps(['style', 'card']);
 
 const getImage = (name : string) => {
   return new URL(`/assets/cards/${name}`, import.meta.url).href;
@@ -10,7 +10,7 @@ const getImage = (name : string) => {
 
 <template>
 
-<div :class="{ selected: props.selected }">
+<div :class="props.style">
 
   <img :src="getImage(props.card+'.svg')" draggable="false"/>
 
@@ -34,9 +34,22 @@ div {
   display: flex;
 }
 
-.selected {
+.red {
   box-shadow: 0 0 5px 4px rgb(255, 44, 44, 0.3);
   border: 2px double rgb(255, 44, 44);
+}
+
+.blue {
+  box-shadow: 0 0 5px 4px rgb(44, 44, 255, 0.3);
+  border: 2px double rgb(44, 44, 255);
+}
+
+.green {
+  box-shadow: 0 0 5px 4px rgb(44, 255, 44, 0.3);
+  border: 2px double rgb(44, 255, 44);
+}
+
+.none {
 }
 
 img {

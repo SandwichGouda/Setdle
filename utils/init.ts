@@ -1,7 +1,7 @@
 import seededShuffle from "seededshuffle"; // not import { shuffle } from "seededshuffle";
 
 export type Card = {
-    selected: boolean;
+    style: string;
     card: string;
 };
 
@@ -29,7 +29,7 @@ export function initMatrix<Card>(rows : number, cols : number, salt : number): C
     for (let i = 0; i < rows; i++) {
         let row: Card[] = [] ;
         for (let j = 0 ; j < cols ; j++) {
-            const c : Card = { selected: false, card: deck_pick[ i*cols + j] }
+            const c : Card = { style: "none", card: deck_pick[ i*cols + j] }
             row.push(c)
         }
         matrix.push(row);

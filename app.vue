@@ -15,31 +15,41 @@ let numberOfSets = ref<number>(getNumberOfSets(matrix.value));
 
 let setsFound : string[][] = [];
 
-async function toggle(i: number, j : number) {
-  if (matrix.value[i][j].selected) {
-    numberSelected.value--;
-  } else {
-    numberSelected.value++;
-  }
-  matrix.value[i][j].selected = !matrix.value[i][j].selected;
-  await sleep(100);
-  if (numberSelected.value >= 3) {
-    numberSelected.value = 0;
-    const selectedCards : string[] = [];
-    for (let ii = 0 ; ii < rows.value ; ii++) {
-      for (let jj = 0 ; jj < cols.value ; jj++) {
-        if (matrix.value[ii][jj].selected) {
-          selectedCards.push(matrix.value[ii][jj].card);
-        }
-        matrix.value[ii][jj].selected = false;
-      }
+async function click(i: number, j : number) : void {
+  if (matrix.value[i][j].style === "blue" || matrix.value[i][j].style === "none") {
+    if (matrix.value[i][j].style === "blue") {
+      numberSelected.value--;
+      matrix.value[i][j].style = "none";
+    } else {
+      numberSelected.value++;
+      matrix.value[i][j].style = "blue";
     }
-    // console.log(selectedCards);
-    if (isASet(selectedCards[0],selectedCards[1],selectedCards[2])) {
-      console.log(selectedCards,setsFound)
-      if (!setsFound.some(a => a.length === selectedCards.length && a.every((val, i) => val === selectedCards[i]))) {
-        setsFound.push(selectedCards)
-      } 
+    if (numberSelected.value >= 3) {
+      numberSelected.value = 0;
+      let selectedCards : number[][] = [];
+      for (let ii = 0 ; ii < rows.value ; ii++) {
+        for (let jj = 0 ; jj < cols.value ; jj++) {
+          if (matrix.value[ii][jj].style === "blue") {
+            selectedCards.push([ii, jj]);
+          }
+        }
+      }
+      if (isASet(matrix.value[selectedCards[0][0]][selectedCards[0][1]].card,matrix.value[selectedCards[1][0]][selectedCards[1][1]].card,matrix.value[selectedCards[2][0]][selectedCards[2][1]].card)) {
+        if (!setsFound.some(set => set.every((card, i) => card.every((coord,j) => coord === selectedCards[i][j])))) {
+          setsFound.push(selectedCards)
+        }
+        matrix.value[selectedCards[0][0]][selectedCards[0][1]].style = "green"
+        matrix.value[selectedCards[1][0]][selectedCards[1][1]].style = "green"
+        matrix.value[selectedCards[2][0]][selectedCards[2][1]].style = "green"
+      } else {
+        matrix.value[selectedCards[0][0]][selectedCards[0][1]].style = "red"
+        matrix.value[selectedCards[1][0]][selectedCards[1][1]].style = "red"
+        matrix.value[selectedCards[2][0]][selectedCards[2][1]].style = "red"
+      }
+      await sleep(300);
+      matrix.value[selectedCards[0][0]][selectedCards[0][1]].style = "none"
+      matrix.value[selectedCards[1][0]][selectedCards[1][1]].style = "none"
+      matrix.value[selectedCards[2][0]][selectedCards[2][1]].style = "none"
     }
   }
 }
@@ -52,9 +62,9 @@ async function toggle(i: number, j : number) {
 
   <div>
 
-    <!-- {{ matrix }}
+    <!-- {{ matrix }} -->
 
-    {{ numberSelected }}
+    <!-- {{ numberSelected }}
 
     {{ numberOfSets }}
 
@@ -66,7 +76,7 @@ async function toggle(i: number, j : number) {
       <tbody>
       <tr v-for="(row,i) in matrix">
         <td v-for="(card,j) in row">
-          <Card @click="toggle(i,j)" :selected="card.selected" :card="card.card"></Card>
+          <Card @click="click(i,j)" :style="card.style" :card="card.card"></Card>
         </td>
       </tr>
       </tbody>
