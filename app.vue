@@ -1,16 +1,19 @@
 <script setup lang="ts">
 
-let numberSelected = ref(0);
-let unselect = ref(false);
+let numberSelected = ref<number>(0);
+let unselect = ref<boolean>(false);
 
-let numberPlays = ref(0);
-
-let rows = ref<number>(4);
+let numberPlays = ref<number>(0);
+let rows = ref<number>(3);
 let cols = ref<number>(4);
 
 /* Note : some of these refs don't have to be ... */
 
 let matrix = ref<Card[][]>(initMatrix(rows.value, cols.value, numberPlays.value));
+
+let numberOfSets = ref<number>(getNumberOfSets(matrix.value));
+
+let setsFound : string[][] = [];
 
 async function toggle(i: number, j : number) {
   if (matrix.value[i][j].selected) {
@@ -18,14 +21,24 @@ async function toggle(i: number, j : number) {
   } else {
     numberSelected.value++;
   }
-  matrix.value[i][j].selected = !matrix.value[i][j].selected
-  await sleep(500)
+  matrix.value[i][j].selected = !matrix.value[i][j].selected;
+  await sleep(100);
   if (numberSelected.value >= 3) {
+    numberSelected.value = 0;
+    const selectedCards : string[] = [];
     for (let ii = 0 ; ii < rows.value ; ii++) {
       for (let jj = 0 ; jj < rows.value ; jj++) {
-        matrix.value[ii][jj].selected = false
+        if (matrix.value[ii][jj].selected) {
+          selectedCards.push(matrix.value[ii][jj].card);
+        }
+        matrix.value[ii][jj].selected = false;
       }
-      numberSelected.value = 0
+    }
+    // console.log(selectedCards);
+    if (isASet(selectedCards[0],selectedCards[1],selectedCards[2])) {
+      if (!setsFound.includes(selectedCards)) {
+        setsFound.push(selectedCards)
+      } 
     }
   }
 }
@@ -38,9 +51,13 @@ async function toggle(i: number, j : number) {
 
   <div>
 
-    <!-- {{ matrix }} -->
+    {{ matrix }}
 
-    <!-- {{ numberSelected }} -->
+    {{ numberSelected }}
+
+    {{ numberOfSets }}
+
+    {{ setsFound }}
 
     <table class="table">
       <thead>
@@ -48,7 +65,7 @@ async function toggle(i: number, j : number) {
       <tbody>
       <tr v-for="(row,i) in matrix">
         <td v-for="(card,j) in row">
-          <Card @click="toggle(i,j)" :selected="card.selected" :card="matrix[i][j].card"></Card>
+          <Card @click="toggle(i,j)" :selected="card.selected" :card="card.card"></Card>
         </td>
       </tr>
       </tbody>
