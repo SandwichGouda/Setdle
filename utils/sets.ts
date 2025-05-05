@@ -31,6 +31,7 @@ export function getNumberOfSets(matrix : Card[][]) : number {
             for (let k = j+1 ; k < numberOfCards ; k++) {
                 if (i !== j && j !== k && i !== k) {
                     if (isASet(cardsList[i], cardsList[j], cardsList[k])) {
+                        console.log(i,j,k);
                         n++;
                     }
                 }

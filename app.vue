@@ -66,9 +66,9 @@ async function click(i: number, j : number) : void {
 
     <!-- {{ numberSelected }}
 
-    {{ numberOfSets }}
+    {{ numberOfSets }} -->
 
-    {{ setsFound }} -->
+    <!-- {{ setsFound }}  -->
 
     <table class="table">
       <thead>
@@ -85,7 +85,11 @@ async function click(i: number, j : number) : void {
   </div>
 </template>
 
-<style scoped>
+<style>
+
+html {
+  background-color: rgb(29, 2, 36); /* Light blue */
+}
 
 body, html, table {
   display: flex;

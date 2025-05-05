@@ -24,7 +24,7 @@ const getImage = (name : string) => {
 div {
   width: 28vh;
   height: 20vh; /* = 16 * 0.714, following the standard ratio for playing cards */
-  background-color: #F0F0F0;
+  background-color: #000000;
   border-radius: 15px; 
   border: 2px double gray;
 
@@ -35,18 +35,18 @@ div {
 }
 
 .red {
-  box-shadow: 0 0 5px 4px rgb(255, 44, 44, 0.3);
-  border: 2px double rgb(255, 44, 44);
+  box-shadow: 0 0 8px 6px rgb(255, 44, 44, 0.6);
+  border: 2px double #ff6262;
 }
 
 .blue {
-  box-shadow: 0 0 5px 4px rgb(44, 44, 255, 0.3);
-  border: 2px double rgb(44, 44, 255);
+  box-shadow: 0 0 8px 6px rgb(255, 255, 44, 0.6);
+  border: 2px double rgb(255, 255, 0);
 }
 
 .green {
-  box-shadow: 0 0 5px 4px rgb(44, 255, 44, 0.3);
-  border: 2px double rgb(44, 255, 44);
+  box-shadow: 0 0 8px 6px rgb(44, 255, 44, 0.6);
+  border: 2px double rgb(78, 241, 78);
 }
 
 .none {
