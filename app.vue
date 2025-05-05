@@ -27,7 +27,7 @@ async function toggle(i: number, j : number) {
     numberSelected.value = 0;
     const selectedCards : string[] = [];
     for (let ii = 0 ; ii < rows.value ; ii++) {
-      for (let jj = 0 ; jj < rows.value ; jj++) {
+      for (let jj = 0 ; jj < cols.value ; jj++) {
         if (matrix.value[ii][jj].selected) {
           selectedCards.push(matrix.value[ii][jj].card);
         }
