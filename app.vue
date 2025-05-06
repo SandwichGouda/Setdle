@@ -16,20 +16,20 @@ let numberOfSets = ref<number>(getNumberOfSets(matrix.value));
 let setsFound : string[][] = [];
 
 async function click(i: number, j : number) : void {
-  if (matrix.value[i][j].style === "blue" || matrix.value[i][j].style === "none") {
-    if (matrix.value[i][j].style === "blue") {
+  if (matrix.value[i][j].style === "yellow" || matrix.value[i][j].style === "none") {
+    if (matrix.value[i][j].style === "yellow") {
       numberSelected.value--;
       matrix.value[i][j].style = "none";
     } else {
       numberSelected.value++;
-      matrix.value[i][j].style = "blue";
+      matrix.value[i][j].style = "yellow";
     }
     if (numberSelected.value >= 3) {
       numberSelected.value = 0;
       let selectedCards : number[][] = [];
       for (let ii = 0 ; ii < rows.value ; ii++) {
         for (let jj = 0 ; jj < cols.value ; jj++) {
-          if (matrix.value[ii][jj].style === "blue") {
+          if (matrix.value[ii][jj].style === "yellow") {
             selectedCards.push([ii, jj]);
           }
         }

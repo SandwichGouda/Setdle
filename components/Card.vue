@@ -39,7 +39,7 @@ div {
   border: 2px double #ff6262;
 }
 
-.blue {
+.yellow {
   box-shadow: 0 0 8px 6px rgb(255, 255, 44, 0.6);
   border: 2px double rgb(255, 255, 0);
 }
