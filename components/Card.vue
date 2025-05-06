@@ -23,7 +23,7 @@ const getImage = (name : string) => {
 
 div {
   width: 28vh;
-  height: 20vh; /* = 16 * 0.714, following the standard ratio for playing cards */
+  height: 17vh;
   background-color: #000000;
   border-radius: 15px; 
   border: 2px double gray;
@@ -49,9 +49,6 @@ div {
   border: 2px double rgb(78, 241, 78);
 }
 
-.none {
-}
-
 img {
   width: 100%;
   
@@ -60,6 +57,5 @@ img {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
 }
-
 
 </style>
