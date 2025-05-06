@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   vite : {
     server: {
       allowedHosts: ['dev.vivenot.dev', 'setdle.vivenot.dev'],
-      port: process.env.port
     }
   },
 
