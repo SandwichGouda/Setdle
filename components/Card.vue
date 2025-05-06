@@ -10,7 +10,7 @@ const getImage = (name : string) => {
 
 <template>
 
-<div :class="props.style">
+<div :class="props.style" id="card">
 
   <img :src="getImage(props.card+'.svg')" draggable="false"/>
 
@@ -57,5 +57,15 @@ img {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
 }
+
+#card {
+  transition: all 0.1s ease;
+}
+
+#card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 4px 2px white;
+}
+
 
 </style>

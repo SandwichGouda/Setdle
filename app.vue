@@ -46,7 +46,7 @@ async function click(i: number, j : number) : Promise<void> {
         matrix.value[selectedCards[1][0]][selectedCards[1][1]].style = "red"
         matrix.value[selectedCards[2][0]][selectedCards[2][1]].style = "red"
       }
-      await sleep(300);
+      await sleep(700);
       matrix.value[selectedCards[0][0]][selectedCards[0][1]].style = "none"
       matrix.value[selectedCards[1][0]][selectedCards[1][1]].style = "none"
       matrix.value[selectedCards[2][0]][selectedCards[2][1]].style = "none"
@@ -101,7 +101,7 @@ async function click(i: number, j : number) : Promise<void> {
       </div>
       <div class="subdiv-down">
 
-        <button class="replay-button" id="replay-button"> Play again </button>
+        <button class="replay-button" id="replay-button" v-if="setsFound.length === numberOfSets"> Play again </button>
         
       </div>
 
