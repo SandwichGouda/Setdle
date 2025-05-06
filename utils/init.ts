@@ -23,11 +23,12 @@ export function initMatrix<Card>(rows : number, cols : number, salt : number): C
     let deck_pick : string[] = structuredClone(allCards);
 
     let currentDate : string = (new Date()).toISOString().slice(0,10);
+    
+    deck_pick = seededShuffle.shuffle(deck_pick, salt+currentDate, true);
 
-    seededShuffle.shuffle(deck_pick, currentDate+salt);
-
+    let row: Card[] = [] ;
     for (let i = 0; i < rows; i++) {
-        let row: Card[] = [] ;
+        row = [];
         for (let j = 0 ; j < cols ; j++) {
             const c : Card = { style: "none", card: deck_pick[ i*cols + j] }
             row.push(c)

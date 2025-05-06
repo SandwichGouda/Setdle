@@ -54,6 +54,13 @@ async function click(i: number, j : number) : Promise<void> {
   }
 }
 
+function replay() {
+  numberPlays.value++
+  matrix.value = initMatrix(rows.value, cols.value, numberPlays.value);
+  numberOfSets.value = getNumberOfSets(matrix.value);
+  setsFound = [];
+}
+
 </script>
 
 <template>
@@ -94,15 +101,13 @@ async function click(i: number, j : number) : Promise<void> {
        
           Keep looking, there's more to find !
       </div>
-      <div class="subdiv-up" v-if="setsFound.length === numberOfSets">
+      <div class="subdiv-up" v-if="setsFound.length >= numberOfSets">
         
         Congratulations, you found all sets !
         
       </div>
       <div class="subdiv-down">
-
-        <button class="replay-button" id="replay-button" v-if="setsFound.length === numberOfSets"> Play again </button>
-        
+        <button class="replay-button" id="replay-button" v-if="setsFound.length === numberOfSets" @click="replay()"> Play again </button>
       </div>
 
     </div>
