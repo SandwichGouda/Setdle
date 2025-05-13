@@ -22,7 +22,9 @@ export function initMatrix<Card>(rows : number, cols : number, salt : number): C
 
     let deck_pick : string[] = structuredClone(allCards);
 
-    let currentDate : string = (new Date()).toISOString().slice(0,10);
+    let currentDate : string = (new Date()).toISOString();
+
+    currentDate = currentDate.slice(5,7) + currentDate.slice(8,10) + currentDate.slice(2,4)
     
     deck_pick = seededShuffle.shuffle(deck_pick, salt+currentDate, true);
 
